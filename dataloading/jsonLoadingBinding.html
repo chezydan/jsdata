@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+
+<body>
+  <h1> load JSON</h1>
+  <script>
+
+var url = "https://raw.githubusercontent.com/chezydan/datasets/421ac85c2bc1b5300123f5f0d48066b2606fde04/users.json";
+d3.json(url, function(error, data) {
+    
+    d3.select("body")
+        .selectAll("p")
+        .data(data)
+        .enter()
+        .append("p")
+        .text(function(d) {
+            return d.name + ", " + d.location;
+        });
+
+});
+
+
+</script>
+</body>
+</html>
