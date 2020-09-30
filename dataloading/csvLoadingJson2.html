@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+
+<body>
+  <h1> load JSON</h1>
+  <script>
+var url ="https://www.ncdc.noaa.gov/cag/global/time-series/globe/land_ocean/ytd/12/1880-2016.json";
+d3.json(url, function(data) {
+    console.log(data);
+});
+
+
+</script>
+</body>
+</html>

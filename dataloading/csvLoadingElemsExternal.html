@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+
+<body>
+  <h1> load csv</h1>
+  <script>
+      url="https://raw.githubusercontent.com/chezydan/datasets/master/employee.csv";
+  var body= d3.select("body");
+  body.append("ol");
+  var ol = d3.select("ol");
+   d3.csv(url, function(data) {
+    var data =data;
+    for (var i = 0; i < data.length; i++) {
+      
+        //console.log(data[i]);
+        console.log(data.columns[0] +":" + data[i].Name);
+        ol.append("li").text(data[i].Name);
+        console.log(data.columns[1] +":" + data[i].Age);
+        
+    }
+});               
+ 
+</script>
+</body>
+</html>

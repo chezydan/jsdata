@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+
+<body>
+  <h1> load csv</h1>
+  <script>
+ 
+   d3.csv("employee.csv", function(data) {
+    var data =data;
+    for (var i = 0; i < data.length; i++) {
+        //console.log(data[i]);
+        console.log(data.columns[0] +":" + data[i].Name);
+        console.log(data.columns[1] +":" + data[i].Age);
+        
+    }
+});               
+ 
+</script>
+</body>
+</html>

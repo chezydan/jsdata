@@ -6,7 +6,7 @@
 
 <body>
     <script>
-        d3.select("body").style("background-color", "purple")
+        d3.select("body").style("background-color", "aqua")
         var matrix = [
                         [1, 2, 3, 4],
                         [5, 6, 7, 8],
@@ -28,7 +28,7 @@
             })
             .enter()    // create placeholders for each element in an inner array
             .append("td") // creates <td> in each placeholder
-            .style("text-align", "right")
+            .style("text-align", "right")   //style(optional)
             .text(function (d) {
                 console.log(d);
                 return d; // add value of each inner array as a text in <td>
