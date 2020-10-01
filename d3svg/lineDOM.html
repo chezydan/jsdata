@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<style>
+     rect{
+        fill: pink;
+        stroke: purple;
+        fill-opacity: 0.68;
+    }
+    body{
+        background-color: aqua;
+    }
+</style>
+</head>
+<body>
+    <script>
+        var width = 500;
+        var height = 500;
+    
+        //Create SVG element
+        var svg = d3.select("body")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+    
+        //Create line element inside SVG
+        svg.append("line")
+           .attr("x1", 100)
+           .attr("x2", 500)
+           .attr("y1", 50)
+           .attr("y2", 50)
+           .attr("stroke", "black")
+    </script>
+</html>
