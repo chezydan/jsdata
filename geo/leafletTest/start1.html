@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+   <head>
+       <style> 
+        h1{text-align: center;}
+        body{background-color: pink;}
+        .map{margin: auto;
+             width:900px;
+              height:580px; }
+    </style>
+    <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+   </head>
+   
+   <body>
+       <h1> first map </h1>
+    <div class="map" id = "map1" style = "width:900px; height:580px; "></div>
+    <br>
+    <div class="map" id= "mds"  >   </div>
+
+
+    <script>
+        // Creating map options
+        var mapOptions = {
+           center: [17.385044, 78.486671],
+           zoom: 10
+        }
+        
+        // Creating a map object
+        var map = new L.map('map1', mapOptions);
+        
+        // Creating a Layer object
+        var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+        
+        // Adding layer to the map
+        map.addLayer(layer);
+
+ 
+        mapOptions={center:[-38.3429,  	-57.9908],
+        zoom:13}
+
+        var mds= new L.map('mds', mapOptions)
+        var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+
+ 
+        mds.addLayer(layer);
+     </script>
+
+   </body>
+</html>

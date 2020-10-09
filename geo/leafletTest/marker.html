@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+   <head>
+       <style> 
+        h1{text-align: center;}
+        body{background-color: pink;}
+        .map{margin: auto;
+             width:900px;
+              height:580px; }
+    </style>
+    <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+   </head>
+   
+   <body>
+       <h1> Marker </h1>
+   
+    <br>
+    <div class="map" id= "mds"  >   </div>
+    <h2> a popup is added with bindPopup</h2>
+
+    <script>
+        // Creating map options
+        var  mapOptions={center:[-38.3429,  	-57.9908],
+        zoom:13}
+  
+        // Creating a Map object
+        var mds= new L.map('mds', mapOptions)        
+        // Creating a Layer object
+        var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+
+
+        // Adding layer to the map
+        mds.addLayer(layer);
+
+        //create a marker 
+    var markerOptions = {
+   title: "MyLocation",
+   clickable: true,
+   draggable: true
+}
+        marker = new L.Marker ([-38.3429,  	-57.9908], markerOptions);
+
+        //add marker to the previously created object
+        marker.addTo(mds);
+
+            var site="Mar del Sur";
+        // Adding pop-up to the marker
+    marker.bindPopup('Hi Welcome ' + site).openPopup();
+    
+    url1="http://3.bp.blogspot.com/-E51AAtX1LyE/UpTR8_gMo3I/AAAAAAAAKIc/pBNVG89DkP4/s1600/boulevardatlantichotel-mardelsud01(1885).jpg"
+    
+    var iconOptions={
+        iconUrl:url1,
+        iconSize: [50,50]
+    }
+    var customIcon = L.icon(iconOptions);
+
+    var markerOptions2 = {
+        title: "Boulevard",
+        clickable: true,
+        draggable: true,
+        icon: customIcon
+}
+    markerhotel= new L.Marker([-38.3429, -57.98001]  , markerOptions2  );
+    markerhotel.addTo(mds);
+         // Adding pop-up to the marker
+        // markerhotel.bindPopup('Hi Welcome ' + site).openPopup();
+     </script>
+
+   </body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Week 2: Visualizing statistics with Leaflet</title>
+
+    <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+
+    <script src = "http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+
+  </head>
+  <body>
+  <div id="map" style="width: 800px; height: 400px"></div>
+
+  <script>
+// Check out 'Resources' in the sidebar - there is a javascript file there:
+// leaflet.js: the leaflet library
+
+// Define the mapviêw with its center coordinates and a zoomlevel
+var centerCoordinates = [20, 30]; 
+var zoomlevel = 2
+
+// Create the map
+var map = L.map('map').setView(centerCoordinates, zoomlevel);   
+
+// Add an OpenStreetMap tile layer
+L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {      attribution: 'Web Cartography Part 2'}).addTo(map);
+
+// GeoJSON dataset with the name and population of a selction of cities
+var cities = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ 7.443965,46.948220 ] 
+      },
+      "properties": {
+        "City":"Bern",
+        "Population":133115
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ -9.139604,38.720723 ]  
+      },
+      "properties": {
+        "City":"Lisbon",
+        "Population":545245
+      }
+    },  
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ -47.867665,-15.793122 ] 
+      },
+      "properties": {
+        "City":"Brasilia",
+        "Population":2570160
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ 151.166779,-33.876436 ]
+      },
+      "properties": {
+        "City":"Sydney",
+        "Population":5005400
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ -0.121466,51.510543 ], 
+       },
+       "properties": {
+         "City":"London",
+         "Population":8787892
+       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ 139.740687,35.714279 ] 
+      },
+      "properties": {
+        "City":"Tokyo",
+        "Population":9467490
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ 37.622088,55.757338 ]
+      },
+      "properties": {
+        "City":"Moscow",
+        "Population":11503501
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ 116.392362,39.918816 ]
+      },
+      "properties": {
+        "City":"Beijing",
+        "Population":18766000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ 55.256578,25.164186 ] 
+      },
+      "properties": {
+        "City":"Dubai",
+        "Population":3052089
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ -79.383692,43.667978 ] 
+      },
+      "properties": {
+        "City":"Toronto",
+        "Population":2731571
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ 31.234383,30.038050 ]
+      },
+      "properties": {
+        "City":"Cairo",
+        "Population":10230350
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ 18.578032,-33.931516 ] 
+      },
+      "properties": {
+        "City":"Cape Town",
+        "Population":433688
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ -99.134008,19.393918 ] 
+      },
+      "properties": {
+        "City":"Mexico City",
+        "Population":8918653
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ -70.665433,-33.453567]
+      },
+      "properties": {
+        "City":"Santiago de Chile",
+        "Population":6310000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates":  [ -77.027961,38.889957 ]
+      },
+      "properties": {
+        "City":"Washington",
+        "Population":693972
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+          "type": "Point",
+          "coordinates":  [ 77.232050,28.612704 ]
+      },
+      "properties": {
+        "City":"New Delhi",
+        "Population":257803
+      }
+    },
+  ]
+} 
+
+/* To do:
+
+Your task is to place circles at the cities' coordinates whose areas are proportional to the cities' population.
+This can be achieved by the following steps:
+- First, write a function getRadius(pop) that calculates the circle's radius given the city's population. The resulting circles should be proportional by area to the cities' population. Preferably, you should also incorporate the maximum symbol size and the highest population value into the calculation.
+- Secondly, write a function style(feature) that returns the symbolisation properties for the circles (radius, fill-color, color, weight, opacity and fill-opacity). For the radius, you can use your getRadius function and the population property from GeoJSON as input.
+- Then, write a function, that binds a popup to each feature, showing the corresponding city's name and population, as well as a tooltip, showing the city's name.
+- Finally, add the circles, popups and tooltips to the map. You can use the pointToLayer method.
+
+*/
+
+/*start of solution*/
+
+// calculate the circles' radius given the cities' population
+function getRadius(pop) {
+  var maxSymbolsize = 35; // maximum symbol size
+  var maxValue = 18766000; // highest population value in the dataset
+  r = maxSymbolsize * Math.sqrt(pop/maxValue); // proportional by area
+  return r;
+}
+
+// create the circles' style
+function style(feature) {
+  return {
+    radius: getRadius(feature.properties.Population), // radius calculated with function above and population property form GeoJSON as input
+    fillColor: "#ff973a",
+    color: "#000",
+    weight: 1,
+    opacity: 0,
+    fillOpacity: 0.8
+  };
+}
+
+// popups and Tooltips for each feature
+function onEachFeature(feature, layer){
+  layer.bindPopup('<table><tbody><tr><td><b>Name:</b></td><td>' +     feature.properties.City + '</td></tr><tr><td><b>Population:</b></td><td>' + feature.properties.Population + '</td></tr></tbody></table>');
+  layer.bindTooltip(''+feature.properties.City);
+}
+
+// Add circles, popups and tooltips to the map
+L.geoJson(cities, {  pointToLayer: function (feature, latlng) {
+    return L.circleMarker(latlng, style(feature));
+  },  onEachFeature: onEachFeature}).addTo(map);
+
+/*end of solution*/
+
+
+  </script>
+  </body>
+</html>

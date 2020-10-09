@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+   <head>
+       <style> 
+        h1{text-align: center;}
+        body{background-color: pink;}
+        .map{margin: auto;
+             width:900px;
+              height:580px; }
+    </style>
+    <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+   </head>
+   
+   <body>
+       <h1> Marker </h1>
+   
+    <br>
+    <div class="map" id= "mds"  >   </div>
+    <h2 id="test"> </h2>
+
+    <script>
+        const test = document.getElementById("test");
+        class Location{
+            constructor(latlon, title){
+              this.latlon=latlon;
+              this.title=title;  
+            }
+        }
+
+        marDelSur = new Location([-38.3429,  	-57.9908], "Mar del Sur")
+        marDelPlata = new Location( [-38, -57.58]  , "Mar del Plata")
+
+         // Creating map options
+         var  mapOptions={center:[-38.3429,  	-57.9908],
+        zoom:13}
+  
+        // Creating a Map object
+        var mds= new L.map('mds', mapOptions)        
+        // Creating a Layer object
+        var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+
+
+        // Adding layer to the map
+        mds.addLayer(layer);
+
+        locs= [ [[-38.3429,  	-57.9908], "Mar del Sur"],
+           [[-38, -57.58]  , "Mar del Plata"      ]];
+
+        locs.push( [  [-38.2703 , -57.8394] , "Myramar" ] ) ;
+         test.innerHTML=locs[0] [0][1]   ;
+
+
+        locs.forEach(display);
+
+        function display(loc){
+
+
+        //create a marker 
+        var markerOptions = {
+   title: loc[1],
+   clickable: true,
+   draggable: true
+}
+        marker = new L.Marker (loc[0], markerOptions);
+
+        //add marker to the previously created object
+        marker.addTo(mds);
+        var text = loc[1] + ": (" + loc[0][0] + "," + loc[0][1] +  ")";
+        marker.bindPopup(text);
+        }
+
+
+
+            
+        // Adding pop-up to the marker
+   
+    
+   
+     </script>
+
+   </body>
+</html>

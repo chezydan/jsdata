@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<style>
+    svg rect {
+        fill: orange;
+    }
+
+    svg text {
+        fill:white;
+        font: 10px sans-serif;
+        text-anchor: end;
+    }
+
+    body {
+        background-color:yellow;
+    }
+</style>
+
+<body>
+
+        <script>
+        const body= document.querySelector("body");
+        var svg1 =        d3.select("body")
+        .append("svg")
+        .attr("width", 500)
+        .attr("height", 400);
+
+        var g5 = svg1.append("g")
+        .attr("transform", "translate(0,2")
+        .append("ellipse")
+        .attr("id", "elps")
+        .attr("cy",200)
+        .attr("cx", 150)
+        .attr("rx", 100)
+        .attr("ry", 200)
+        .attr("fill" , "blue")
+        .attr("opacity", 0.90)
+        .on("click", function(){
+        d3.select(this).style("fill", "green");
+        d3.select("body").style("background-color","steelblue")  });
+
+
+        
+
+        </script>
+
+
+</body>
+
+</html>

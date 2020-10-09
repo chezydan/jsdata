@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+   <head>
+       <style> 
+        h1{text-align: center;}
+        body{background-color: pink;}
+        .map{margin: auto;
+             width:1200px;
+              height:680px; }
+    </style>
+    <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+   </head>
+   
+   <body>
+       <h1> Marker </h1>
+
+    <br>
+    <div class="map" id= "mymap"  >   </div>
+    
+
+    <script>
+
+    var mapOptions ={center:[31.8397926, 34.7713917], zoom: 8};
+
+
+    var theMap = new L.map("mymap", mapOptions)    ;
+
+    var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')    ;
+
+    theMap.addLayer(layer);
+
+//32.0860695,34.7698022,21z
+
+        var markers = [
+            {"coors":[32.0860695,34.7698022], "options":{"title":"Leonardo Art", "city":"Tel Aviv"}  },
+            {"coors" :[31.7707668,34.6210458], "options":{"title": "Leonardo Plaza Ashdod", "city":"Ashdod"} },
+            {"coors" :[32.0166318,34.7387828], "options":{"title": "Leonardo Suite", "city":"Bat-Yam"} },
+            {"coors":[32.0840572,34.7691464], "options":{"title": "Herrods Tel Aviv", "city":"Tel Aviv"} },
+            {"coors":[32.0843404,34.7696274], "options":{"title": "Leonardo Beach", "city":"Tel Aviv"} } ,
+            {"coors":[31.6829376,34.5594251], "options":{"title": "Leonardo Ashkelon", "city":"Ashkelon"} }
+            
+                                   
+
+        ];
+
+        for ( var i = 0 ; i< markers.length; i++){
+        marker= new L.Marker(markers[i].coors  , markers[i].options  );
+        marker.addTo(theMap);
+        var par =document.createElement("p");
+        par.innerHTML=markers[i].options.title+ ":"+ markers[i].options.city;
+        document.querySelector("body").appendChild(par);
+        
+        }
+
+    </script>
+   </body>
+</html>
